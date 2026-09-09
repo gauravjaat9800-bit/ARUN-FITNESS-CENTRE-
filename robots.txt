@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/sitemap.xml
