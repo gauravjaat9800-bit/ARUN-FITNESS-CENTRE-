@@ -1,0 +1,9 @@
+{
+  "name": "ARUN FITNESS CENTRE",
+  "short_name": "ARUN FITNESS",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#080b0d",
+  "theme_color": "#0a0d0f",
+  "description": "ARUN FITNESS CENTRE membership, facilities and fitness tools."
+}
