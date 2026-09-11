@@ -44,6 +44,12 @@ jobs:
           s = s.replace('<h1>BUILD A STRONGER YOU.</h1>', '<h1>ARUN FITNESS CENTRE.<br><span class="accent">GYM &amp; FITNESS.</span></h1>')
           s = s.replace('Welcome to ARUN FITNESS CENTRE — a friendly gym with cardio, guidance, AC comfort and flexible membership fees.', 'ARUN FITNESS CENTRE is a gym and fitness centre for strength, cardio and everyday fitness. Get workout guidance, AC comfort, parking and flexible membership plans.')
 
+          if 'id="programs"' not in s:
+              nav = '<a href="#tools">Tools</a>'
+              s = s.replace(nav, '<a href="#programs">Programs</a>' + nav)
+              programs = '<section id="programs"><div class="wrap"><div class="section-head"><div><div class="eyebrow">Fitness Programs</div><h2>Train for your goal.</h2></div><p class="muted">Build consistency with practical gym workouts and guidance for everyday fitness.</p></div><div class="grid"><div class="card"><div class="icon">💪</div><h3>Strength &amp; Fitness</h3><p class="muted">Build strength, improve movement and stay consistent with regular gym training.</p></div><div class="card"><div class="icon">🏃</div><h3>Cardio &amp; Conditioning</h3><p class="muted">Use cardio workouts to improve conditioning, stamina and everyday fitness.</p></div><div class="card"><div class="icon">🎯</div><h3>Weight Management</h3><p class="muted">Combine regular workouts with consistent habits to support your fitness goals.</p></div><div class="card"><div class="icon">🌱</div><h3>Beginner Guidance</h3><p class="muted">New to the gym? Get basic guidance to start training with better confidence.</p></div><div class="card"><div class="icon">📈</div><h3>Fitness Progress</h3><p class="muted">Stay consistent, track your progress and keep improving your everyday routine.</p></div></div></div></section>'
+              s = s.replace('<section id="tools">', programs + '<section id="tools">')
+
           p.write_text(s, encoding='utf-8')
           PY
 
@@ -56,5 +62,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html assets/favicon.png
-          git commit -m "Improve SEO metadata and add favicon"
+          git commit -m "Add fitness program content for SEO"
           git push
