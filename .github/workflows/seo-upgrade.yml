@@ -50,6 +50,11 @@ jobs:
               programs = '<section id="programs"><div class="wrap"><div class="section-head"><div><div class="eyebrow">Fitness Programs</div><h2>Train for your goal.</h2></div><p class="muted">Build consistency with practical gym workouts and guidance for everyday fitness.</p></div><div class="grid"><div class="card"><div class="icon">💪</div><h3>Strength &amp; Fitness</h3><p class="muted">Build strength, improve movement and stay consistent with regular gym training.</p></div><div class="card"><div class="icon">🏃</div><h3>Cardio &amp; Conditioning</h3><p class="muted">Use cardio workouts to improve conditioning, stamina and everyday fitness.</p></div><div class="card"><div class="icon">🎯</div><h3>Weight Management</h3><p class="muted">Combine regular workouts with consistent habits to support your fitness goals.</p></div><div class="card"><div class="icon">🌱</div><h3>Beginner Guidance</h3><p class="muted">New to the gym? Get basic guidance to start training with better confidence.</p></div><div class="card"><div class="icon">📈</div><h3>Fitness Progress</h3><p class="muted">Stay consistent, track your progress and keep improving your everyday routine.</p></div></div></div></section>'
               s = s.replace('<section id="tools">', programs + '<section id="tools">')
 
+          if 'id="faq"' not in s:
+              faq = '<section id="faq"><div class="wrap"><div class="section-head"><div><div class="eyebrow">Gym FAQ</div><h2>Common questions.</h2></div><p class="muted">Quick answers about membership, timings and getting started at ARUN FITNESS CENTRE.</p></div><div class="faq"><details><summary>What are the ARUN FITNESS CENTRE membership fees?</summary><p>Membership options are ₹700 for 1 month, ₹1,800 for 3 months, ₹3,200 for 6 months and ₹6,000 for 1 year. Fees can be discussed with the gym.</p></details><details><summary>What are the gym timings?</summary><p>The gym is open from 5:30 AM to 12:00 PM in the morning and from 4:00 PM to 10:00 PM in the evening.</p></details><details><summary>Does the gym provide workout guidance?</summary><p>Yes. Free basic workout guidance is available for members, including beginner guidance to help you start training with confidence.</p></details><details><summary>Does ARUN FITNESS CENTRE have cardio and AC facilities?</summary><p>Yes. The gym offers cardio equipment and an air-conditioned workout environment.</p></details><details><summary>How can I contact the gym?</summary><p>Call or WhatsApp 8468972091 to ask about membership, a free trial, discounts or negotiable fees.</p></details></div></div></section>'
+              s = s.replace('<section id="contact">', faq + '<section id="contact">')
+              s = s.replace('<a href="#contact">Contact</a>', '<a href="#faq">FAQ</a><a href="#contact">Contact</a>')
+
           p.write_text(s, encoding='utf-8')
           PY
 
@@ -62,5 +67,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html assets/favicon.png
-          git commit -m "Add fitness program content for SEO"
+          git commit -m "Add useful gym FAQ content for SEO"
           git push
