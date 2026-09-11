@@ -1,0 +1,52 @@
+name: SEO Upgrade
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply SEO improvements
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          s = s.replace('<meta name="description" content="ARUN FITNESS CENTRE">', '<meta name="description" content="ARUN FITNESS CENTRE — gym and fitness centre with cardio, workout guidance, AC gym, parking and flexible membership plans. Explore membership options and contact us for a free trial.">')
+          s = s.replace('<title>ARUN FITNESS CENTRE</title>', '<title>ARUN FITNESS CENTRE | Gym, Fitness &amp; Membership</title>')
+
+          canonical = '<link rel="canonical" href="https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/">'
+          robots = '<meta name="robots" content="index,follow,max-image-preview:large">'
+          og = '<meta property="og:type" content="website"><meta property="og:title" content="ARUN FITNESS CENTRE | Gym, Fitness &amp; Membership"><meta property="og:description" content="ARUN FITNESS CENTRE — gym and fitness centre with cardio, workout guidance, AC gym, parking and flexible membership plans."><meta property="og:url" content="https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="ARUN FITNESS CENTRE | Gym, Fitness &amp; Membership"><meta name="twitter:description" content="ARUN FITNESS CENTRE — gym and fitness centre with cardio, workout guidance, AC gym, parking and flexible membership plans.">'
+          schema = '<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"ARUN FITNESS CENTRE","url":"https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/"},{"@type":"Organization","name":"ARUN FITNESS CENTRE","url":"https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/","telephone":"+918468972091","description":"ARUN FITNESS CENTRE is a gym and fitness centre offering cardio, workout guidance, AC gym comfort, parking and flexible membership plans."}]}</script>'
+
+          marker = '<meta name="viewport" content="width=device-width,initial-scale=1">'
+          if 'rel="canonical"' not in s:
+              s = s.replace(marker, marker + canonical + robots + og + schema)
+
+          s = s.replace('<h1>BUILD A STRONGER YOU.</h1>', '<h1>ARUN FITNESS CENTRE.<br><span class="accent">GYM &amp; FITNESS.</span></h1>')
+          s = s.replace('Welcome to ARUN FITNESS CENTRE — a friendly gym with cardio, guidance, AC comfort and flexible membership fees.', 'ARUN FITNESS CENTRE is a gym and fitness centre for strength, cardio and everyday fitness. Get workout guidance, AC comfort, parking and flexible membership plans.')
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit SEO changes
+        run: |
+          if git diff --quiet; then
+            echo "SEO changes already applied."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Improve SEO metadata and structured data"
+          git push
