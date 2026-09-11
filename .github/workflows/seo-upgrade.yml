@@ -14,6 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Generate favicon
+        run: |
+          mkdir -p assets
+          echo 'iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAAFLUlEQVR42u2d228UVRzHz5zZ21xaWKpysbaIVrnEtEqRTQuyrSbVEBobCJby2MSo/AFG46MvJL7wwKPRJ2JSCWglJMTEWBbb2gAP0HijilEqJMCidpfdshdfTKxwZubM7Dk73Znv96nZTs7Zfj/n+zuXnnaVhNFEIP9EYQEAAAAEAAAAAQAAQPVXREajJxfag+rXq+avYhtURG3EAmy6VBgCAITQeoEYagIQcuuFYKBw398K7CUBsF5gFCjc9zcKFO77y8BFCeJvV/hiuRHN5TSBFwBnxwG2XpIbwnbCIbF+6Q8rpCBzJcC+p1BZL9wcCvelRt8xJVRe32AgYBlqAxDuc7phHwL8PsBnUQx/f0OABCzjBGD418EZJGC5JsCqbGH4ewuBlZ9IQAPOARAAAAAEAAAAAQAAQAAAABAAAAAEAAAAAQAAQAAAABAAAAAEAAAAcSjiY98xTfn451a9yW4QvPHMteu/lFw1++aRVQOjAv78/7up4jsvXQ9yAlJ7dHv3CSF9IyZKkCz1HzQcn+kbMRQFACSoZZ3a2ac5PvZIe2RzbwIAxGvXsKFQYUEBANfiL+49Q3pcD2wZ8mcV1LE19tjGKOfDmklTg/rXn+Rq7/fDt7PjR/9CAkjfQVNSXFCCnKVGlZ372GV9NlNgvt6ZTrQ8qgKAGG17RWtaxe736KFbf9+uPPi6Qkl62AQAUdMve/j/MF2cnytNnsxbVC0DAASouYV2D7CX/xNjOULI2U/Zk23rU9GO7jgA1KoX9htqlLGmrJTJNyfyhJDLmcLtP8rh2RDUG4DV+ufSRCF7o0wIqVbIuRPsKrRznxGJBW1DUNd9QNum6BNdMea3zo7lln695y3GcaaZpNte1iY/z3t+A6OHk6OHkzxPXvvp3qFn54OWAKvhX1qsTn72n60/zhRvXC0J2UCgBC3pSSXpYXYRP3/mbu7P/60+M8fZU/HWAa35IRUAvKirX0uuUS3qT97xlX83cRGya78OAN7qD3v4F3LVmdP323318uJv398LQxWqEwC9mW7fzR65357KF/NVRiwsNgQbOmPtW6KBAVCnVdCOvXpMU2z2Xw8qM5YbeW+lxYbA/OjdrIe3Ed7TUKu6sXCncvFL9gHc/Fxp7uIiezf3mkFVJIBbax6PbEqxTxHMlfR4ts1tg8nVateL2oUzdzEH8A1/Caf5gTmWkA5AUUj6gHiznt+tGysoADhrc29i9XrxhS6WUHr36gDgZ63oD8SGQC6AuK70DMkapxu3x9duiDQ6ALk/QGpQ10w24yOv3/zqGNdFhyefi30wsdZqej/2/h0kwPX6p1wiM6d5F5FXLize/N3icLTxLy5KBNCyTu1Ms28VzmYKC9kKf1PTp9i0Hm6LbNmRAAC20gdMq8uHUy5/qTJt/XyjbwgkArC6/VCtkukv3AGYPWeZmJ4hI2EoAHC/OrrjrU+zzyyvnC/emi+7as1mzkgYSmpQBwAXlWFq3MsZztR4PpAbAsuPMMF/zvUsV9bhj/SCfhQBAQAAQAAAABAAAAAEAAAAAQAAQAAAAJADALcfSAbZ+2PlJxLQgCUIIRDoDBKwjBPg+WO6Mfz5nUQClvccgBBIHf61JgAMavfBGYA9QDCwd8DxFo/lvSC3RofwvpAQTyJi301IMAjMPW8CXPUaYAzCTXABABWfX/xDkEpqF+7LOooAA7H+uCtBKEfChyatc39wX1gCEAUhA1EAgNBiEFIDhAEICQzhhVcKAKgekzAEAAAAAQAAQADQyPoHooONRvq6FzsAAAAASUVORK5CYII=' | base64 -d > assets/favicon.png
+
       - name: Apply SEO improvements
         run: |
           python3 - <<'PY'
@@ -26,12 +31,15 @@ jobs:
 
           canonical = '<link rel="canonical" href="https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/">'
           robots = '<meta name="robots" content="index,follow,max-image-preview:large">'
+          favicon = '<link rel="icon" href="assets/favicon.png" type="image/png">'
           og = '<meta property="og:type" content="website"><meta property="og:title" content="ARUN FITNESS CENTRE | Gym, Fitness &amp; Membership"><meta property="og:description" content="ARUN FITNESS CENTRE — gym and fitness centre with cardio, workout guidance, AC gym, parking and flexible membership plans."><meta property="og:url" content="https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="ARUN FITNESS CENTRE | Gym, Fitness &amp; Membership"><meta name="twitter:description" content="ARUN FITNESS CENTRE — gym and fitness centre with cardio, workout guidance, AC gym, parking and flexible membership plans.">'
           schema = '<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"ARUN FITNESS CENTRE","url":"https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/"},{"@type":"Organization","name":"ARUN FITNESS CENTRE","url":"https://gauravjaat9800-bit.github.io/ARUN-FITNESS-CENTRE-/","telephone":"+918468972091","description":"ARUN FITNESS CENTRE is a gym and fitness centre offering cardio, workout guidance, AC gym comfort, parking and flexible membership plans."}]}</script>'
 
           marker = '<meta name="viewport" content="width=device-width,initial-scale=1">'
           if 'rel="canonical"' not in s:
-              s = s.replace(marker, marker + canonical + robots + og + schema)
+              s = s.replace(marker, marker + canonical + robots + favicon + og + schema)
+          elif 'assets/favicon.png' not in s:
+              s = s.replace('</head>', favicon + '</head>')
 
           s = s.replace('<h1>BUILD A STRONGER YOU.</h1>', '<h1>ARUN FITNESS CENTRE.<br><span class="accent">GYM &amp; FITNESS.</span></h1>')
           s = s.replace('Welcome to ARUN FITNESS CENTRE — a friendly gym with cardio, guidance, AC comfort and flexible membership fees.', 'ARUN FITNESS CENTRE is a gym and fitness centre for strength, cardio and everyday fitness. Get workout guidance, AC comfort, parking and flexible membership plans.')
@@ -47,6 +55,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Improve SEO metadata and structured data"
+          git add index.html assets/favicon.png
+          git commit -m "Improve SEO metadata and add favicon"
           git push
